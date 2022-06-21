@@ -8,7 +8,7 @@ const getStockOptionsArray = () => {
 
 const getUserStockOptions = () => {
   // get user stock options
-  return 2880;
+  return document.getElementById("stockOptions").value;
 };
 
 const calcPercentBest = (userStockOptions, golfCourse) => {
@@ -60,14 +60,27 @@ const getResult = (bestOption) => {
 };
 
 const update = (result) => {
-  const element = document.getElementById("output");
-  element.innerText = result;
+  const getNameFromNumber = (num) => {
+    num = parseInt(num);
+    if (num === 3) return "Front 3";
+    if (num === 6) return "Middle 6";
+    return "Back 9";
+  };
+
+  const ul = document.getElementById("output");
+  ul.innerHTML = "";
+  for (key in result) {
+    const li = document.createElement("li");
+    const name = getNameFromNumber(key);
+    const out = `${name}: ${result[key]}`;
+    li.appendChild(document.createTextNode(out));
+    ul.appendChild(li);
+  }
 };
 
 const bossbot = () => {
   const stockOptions = getStockOptionsArray();
-  const userStockOptions = document.getElementById("stockOptions").value;
-  console.log(userStockOptions);
+  const userStockOptions = getUserStockOptions();
   const bestOption = [];
   minCourses(stockOptions, userStockOptions, bestOption);
   const result = getResult(bestOption);
