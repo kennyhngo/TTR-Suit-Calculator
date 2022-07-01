@@ -8,7 +8,7 @@ const getStockOptionsArray = () => {
 
 const getUserStockOptions = () => {
   // get user stock options
-  return document.getElementById("stockOptions").value;
+  return document.getElementById("stockOptions").value.replaceAll(",", "");
 };
 
 const calcPercentBest = (userStockOptions, golfCourse) => {
@@ -86,3 +86,10 @@ const bossbot = () => {
   const result = getResult(bestOption);
   update(result);
 };
+
+const input = document.getElementById("stockOptions");
+input.addEventListener("keypress", (event) => {
+  if (event.key !== "Enter") return;
+  event.preventDefault();
+  bossbot();
+});

@@ -1,5 +1,13 @@
+body {
+    font-size: 24px;
+}
+
 .middle {
     position: absolute;
     top: 25%;
     left: 25%;
+}
+
+#stockOptions, #stockButton {
+    font-size: 24px;
 }
